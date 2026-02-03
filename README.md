@@ -1,42 +1,66 @@
-# sv
+# Personal HTML Widgets
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A collection of personal HTML widgets built with Svelte and compiled to static HTML for embedding across note-taking applications. Each widget is accessible via its own URL route and hosted on GitHub Pages.
 
-## Creating a project
+## Widgets
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Relative Time
+Displays the relative time between a specified time and the current time (e.g., "2 hours ago", "in 3 days").
+
+**Live Demo:** [https://gunt3001.github.io/widgets/relative-time](https://gunt3001.github.io/widgets/relative-time)
+
+### Seasons
+Shows the week number of the current season of the year (Winter, Spring, Summer, Fall).
+
+**Live Demo:** [https://gunt3001.github.io/widgets/seasons](https://gunt3001.github.io/widgets/seasons)
+
+## Development
+
+Install dependencies:
 
 ```sh
-# create a new project
-npx sv create my-app
+pnpm install
 ```
 
-To recreate this project with the same configuration:
+Start the development server:
 
 ```sh
-# recreate this project
-pnpm dlx sv create --template minimal --types ts --add tailwindcss="plugins:none" --install pnpm .
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm dev
 ```
 
 ## Building
 
-To create a production version of your app:
+To create a production build:
 
 ```sh
-npm run build
+pnpm build
 ```
 
-You can preview the production build with `npm run preview`.
+The static files will be generated in the `build` directory.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Preview the production build:
+
+```sh
+pnpm preview
+```
+
+## Deployment
+
+This project is configured for static site generation and is deployed to GitHub Pages. The built files are served from the `build` directory.
+
+To deploy:
+1. Build the project: `pnpm build`
+2. Push changes to the repository
+3. GitHub Actions will automatically deploy to GitHub Pages
+
+## Technology Stack
+
+- **Svelte**: Component framework
+- **SvelteKit**: Build tool with static adapter
+- **TypeScript**: Type safety
+- **Tailwind CSS**: Styling
+- **GitHub Pages**: Hosting
+
+## License
+
+Personal project - all rights reserved.
