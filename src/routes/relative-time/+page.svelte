@@ -1,9 +1,23 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import { browser } from "$app/environment";
+    import { onMount } from "svelte";
 
-	const timeParam = getTimeParam();
-	const timeSince = calculateTimeSince(timeParam);
+	let dateParam: string | undefined = $state();
+	let timeSince = $derived(calculateTimeSince(dateParam));
+
+	onMount(() => {
+		let paramKeys = page.url.searchParams.keys();
+		// Assume the date param is the search query key in the format 0000-00
+		const pattern = /^\d{4}-\d{2}$/;
+		
+		for (const key of paramKeys) {
+			if (pattern.test(key)) {
+				dateParam = key;
+				break;
+			}
+		}
+	})
 
 	function isInIframe(): boolean {
 		try {
@@ -23,21 +37,10 @@
 		navigator.clipboard.writeText(text);
 	}
 
-	function getTimeParam(): string | null {
-		if (!browser) {
-			return null;
-		}
-		const hash = window.location.hash.substring(1); // Remove the leading '#'
-		if (hash.length != 7) {
-			return null;
-		}
-		return hash;
-	}
-
 	function calculateTimeSince(
-		dateString: string | null,
+		dateString: string | undefined,
 	): { years: number; months: number } | null {
-		if (dateString === null) {
+		if (dateString === undefined) {
 			return null;
 		}
 
